@@ -1,0 +1,1 @@
+document.getElementById('clearData').addEventListener('click', () => chrome.storage.local.clear());

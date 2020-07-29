@@ -1,0 +1,98 @@
+<!doctype html>
+<style type="text/css">
+	body {
+		padding: 10px;
+		margin: 0;
+		font-family: Helvetica, Ubuntu, Arial, sans-serif;
+		text-align: center;
+	}
+
+	h1 {
+		font-size: 4em;
+		margin: 0;
+	}
+
+	input {
+		padding: 5px;
+	}
+
+	input[type=checkbox] {
+		position: relative;
+		top: 2px;
+	}
+
+	.page {
+		display: none;
+	}
+
+	.row {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 5px;
+	}
+
+	.error {
+		color: #a00;
+	}
+
+	#codeDisplay {
+		cursor: pointer;
+	}
+
+	#codeDisplay #code {
+		transition: color 2s ease;
+	}
+
+	#codeDisplay:active #code {
+		transition: none;
+		color: #71ab34;
+	}
+
+	#timer_bar {
+		height: 8px;
+		width: 100%;
+		background: #ddd;
+	}
+
+	#timer_bar_inner {
+		background-color: #333;
+		height: 8px;
+		width: 0;
+		animation-timing-function: linear;
+		animation-fill-mode: forwards;
+	}
+
+	@keyframes maxWidth {
+		100% {
+			width: 100%;
+		}
+	}
+</style>
+
+<div class="page" id="tokenEntry">
+	<input id="tokenEntryField" type="text" placeholder="V3 android token, e.g. http://127.0.0.1/securid/ctf?ctfData=..." />
+	<span class="error" id="tokenEntryError"></span>
+	<div class="row">
+		<label for="tokenEntryRemember"><input id="tokenEntryRemember" type="checkbox" checked /> Remember my token</label>
+		<button id="tokenEntrySave">Save</button>
+	</div>
+</div>
+
+<div class="page" id="pinEntry">
+	<input id="pinEntryField" type="number" placeholder="Pin, e.g. 1234" />
+	<span class="error" id="pinEntryError"></span>
+	<div class="row">
+		<label for="pinEntryRemember"><input id="pinEntryRemember" type="checkbox" /> Remember my pin</label>
+		<button id="pinEntrySave">Save</button>
+	</div>
+</div>
+
+<div class="page" id="codeDisplay">
+	<h1 id="code"></h1>
+	<div id="timer_bar">
+		<div id="timer_bar_inner"></div>
+	</div>
+</div>
+
+<script type="text/javascript" src="securid-browser.js"></script>
+<script type="text/javascript" src="script.js"></script>

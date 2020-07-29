@@ -1,0 +1,1 @@
+window.securid = require('../../../rsa-securid/dist/index');

@@ -1,0 +1,22 @@
+{
+  "name": "RSA SecurID Code Generator",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Generates RSA SecurID Codes. Not affiliated with RSA Security LLC.",
+  "homepage_url": "http://github.com/domdomegg/rsa-securid-browser-extension",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "options_page": "options/index.html",
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "RSA SecurID",
+    "default_popup": "browser_action/index.html"
+  },
+  "permissions": [
+    "clipboardWrite",
+    "storage"
+  ]
+}
