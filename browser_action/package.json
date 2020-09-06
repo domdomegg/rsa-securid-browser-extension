@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "rsa-securid": "^2.0.7"
+  },
+  "devDependencies": {
+    "browserify": "^16.5.2"
+  },
+  "scripts": {
+    "prebuild": "rm -f ../chrome-extension.zip",
+    "build": "browserify securid.js -o securid-browser.js && cd .. && zip -r chrome-extension.zip . -x \"img/*.gif\" -x \"img/*.svg\" -x \"*node_modules*\" -x \".git*\" -x \"*package*.json\" -x \"*.md\""
+  }
+}
