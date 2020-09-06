@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "rsa-securid": "^2.0.7"
+  },
+  "devDependencies": {
+    "browserify": "^16.5.2"
+  },
+  "scripts": {
+    "build": "browserify browser_action/securid.js -o browser_action/securid-browser.js"
+  }
+}

@@ -25,7 +25,13 @@ const onToken = () => {
         token = securid.v3(document.getElementById('tokenEntryField').value, '', securid.deviceId.android);
     } catch (err) {
         document.getElementById('tokenEntryError').innerText = err;
-        return;
+
+        // Fallback for non-android tokens
+        try {
+            token = securid.v3(document.getElementById('tokenEntryField').value);
+        } catch (err) {
+            return;
+        }
     }
 
     document.getElementById('tokenEntry').style.display = '';
