@@ -18,8 +18,7 @@ Found a bug, or have an idea for an improvement? [Raise an issue](https://github
     - Set the PIN to something memorable, and submit it
     - Choose 'Scan Token Now' (the QR code option)
     - Use a QR code scanning app (e.g. [Google Lens](https://play.google.com/store/apps/details?id=com.google.ar.lens) or [Apple Camera](https://support.apple.com/en-gb/HT208843))
-
-    Your token should look like `http://127.0.0.1/securid/ctf?ctfData=AwAA...`
+    - Your token should look like `http://127.0.0.1/securid/ctf?ctfData=AwAA...`
 6. Click the extension icon (to the right of the address bar) and paste in the token
 
 If you need to reset the extension, you can do this in the options (right click the extension icon, then 'Options')
