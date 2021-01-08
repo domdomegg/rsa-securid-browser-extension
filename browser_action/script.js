@@ -20,23 +20,40 @@ const requestToken = () => {
     document.getElementById('tokenEntrySave').addEventListener('click', () => onToken());
 }
 const onToken = () => {
-    let token;
-    try {
-        token = securid.v3(document.getElementById('tokenEntryField').value, '', securid.deviceId.android);
-    } catch (err) {
-        document.getElementById('tokenEntryError').innerText = err;
+    const tokenEntryFieldValue = document.getElementById('tokenEntryField').value;
+    const [token, err] = tryLots(
+            () => securid.v3(tokenEntryFieldValue, '', securid.deviceId.android),
+            () => securid.v3(tokenEntryFieldValue),
+            () => securid.v3(tokenEntryFieldValue, '', securid.deviceId.iphone),
+            () => securid.v3(tokenEntryFieldValue, '', securid.deviceId.blackberry),
+            () => securid.v3(tokenEntryFieldValue, '', securid.deviceId.blackberry10),
+            () => securid.v3(tokenEntryFieldValue, '', securid.deviceId.windowsPhone),
+            () => securid.v3(tokenEntryFieldValue, '', securid.deviceId.windows),
+            () => securid.v3(tokenEntryFieldValue, '', securid.deviceId.macos),
 
-        // Fallback for non-android tokens
-        try {
-            token = securid.v3(document.getElementById('tokenEntryField').value);
-        } catch (err) {
-            return;
-        }
+            () => securid.v2(tokenEntryFieldValue, '', securid.deviceId.android),
+            () => securid.v2(tokenEntryFieldValue),
+            () => securid.v2(tokenEntryFieldValue, '', securid.deviceId.iphone),
+            () => securid.v2(tokenEntryFieldValue, '', securid.deviceId.blackberry),
+            () => securid.v2(tokenEntryFieldValue, '', securid.deviceId.blackberry10),
+            () => securid.v2(tokenEntryFieldValue, '', securid.deviceId.windowsPhone),
+            () => securid.v2(tokenEntryFieldValue, '', securid.deviceId.windows),
+            () => securid.v2(tokenEntryFieldValue, '', securid.deviceId.macos),
+        );
+    
+    if (err) {
+        document.getElementById('tokenEntryError').innerText = err;
+        return;
+    }
+    if (!token) {
+        document.getElementById('tokenEntryError').innerText = 'Failed to parse token';
+        return;
     }
 
     document.getElementById('tokenEntry').style.display = '';
 
     const storableToken = {
+        version: token.version,
         serial: token.serial,
         flags: token.flags,
         intervalInSeconds: token.intervalInSeconds,
@@ -99,3 +116,28 @@ const generateCode = (token, pin) => {
 document.getElementById('codeDisplay').addEventListener('click', () => {
     navigator.clipboard.writeText(document.getElementById('code').innerText);
 });
+
+/**
+ * Tries a series of functions that return a result or throw.
+ * @param  {...Function} fns
+ * @returns a 2-tuple, either:
+ * - the first element as result from the first non-throwing function i.e. `[result, undefined]`
+ * - or if all throw then the second element as the first thrown thing i.e. `[undefined, err]`
+ * 
+ * If fns is empty then will return `[undefined, undefined]`.
+ */
+const tryLots = (...fns) => {
+    let isFirstThrownThingSet = false;
+    let firstThrownThing;
+    for (fn of fns) {
+        try {
+            return [fn(), undefined];
+        } catch (err) {
+            if (!isFirstThrownThingSet) {
+                firstThrownThing = err;
+                isFirstThrownThingSet = true;
+            }
+        }
+    }
+    return [undefined, firstThrownThing];
+}

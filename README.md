@@ -2,6 +2,8 @@
 
 Easy to use browser extension for generating RSA SecurID token codes.
 
+NB: This is an unofficial hobby project, and is in no way affiliated with or endorsed by RSA Security. Use at your own risk.
+
 ![Example of using the RSA SecurID browser extension to login](img/demo.gif)
 
 Found a bug, or have an idea for an improvement? [Raise an issue](https://github.com/domdomegg/rsa-securid-browser-extension/issues).
@@ -10,7 +12,7 @@ Found a bug, or have an idea for an improvement? [Raise an issue](https://github
 
 Install this extension from the [Chrome Web Store](https://chrome.google.com/webstore/detail/rsa-securid-code-generato/bdkphnndaejdmmbohpejmlfejfdbepap).
 
-## 👷 Manual Install
+## 👷 Manual install
 
 1. Clone this repository
 2. Go to `chrome://extensions`
