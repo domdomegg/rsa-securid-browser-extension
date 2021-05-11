@@ -17,28 +17,34 @@ const requestToken = () => {
     document.getElementById('tokenEntryField').focus();
 
     document.getElementById('tokenEntryField').addEventListener('keyup', (event) => { if (event.keyCode == ENTER_KEY_CODE) onToken(); });
+    document.getElementById('deviceEntryField').addEventListener('keyup', (event) => { if (event.keyCode == ENTER_KEY_CODE) onToken(); });
+    document.getElementById('passwordEntryField').addEventListener('keyup', (event) => { if (event.keyCode == ENTER_KEY_CODE) onToken(); });
     document.getElementById('tokenEntrySave').addEventListener('click', () => onToken());
 }
 const onToken = () => {
     const tokenEntryFieldValue = document.getElementById('tokenEntryField').value;
+    const passwordEntryFieldValue = document.getElementById('passwordEntryField').value;
+    const deviceEntryFieldValue = document.getElementById('deviceEntryField').value;
     const [token, err] = tryLots(
-            () => securid.v3(tokenEntryFieldValue, '', securid.deviceId.android),
+            () => securid.v3(tokenEntryFieldValue, passwordEntryFieldValue, deviceEntryFieldValue),
+            () => securid.v3(tokenEntryFieldValue, passwordEntryFieldValue, securid.deviceId.android),
             () => securid.v3(tokenEntryFieldValue),
-            () => securid.v3(tokenEntryFieldValue, '', securid.deviceId.iphone),
-            () => securid.v3(tokenEntryFieldValue, '', securid.deviceId.blackberry),
-            () => securid.v3(tokenEntryFieldValue, '', securid.deviceId.blackberry10),
-            () => securid.v3(tokenEntryFieldValue, '', securid.deviceId.windowsPhone),
-            () => securid.v3(tokenEntryFieldValue, '', securid.deviceId.windows),
-            () => securid.v3(tokenEntryFieldValue, '', securid.deviceId.macos),
+            () => securid.v3(tokenEntryFieldValue, passwordEntryFieldValue, securid.deviceId.iphone),
+            () => securid.v3(tokenEntryFieldValue, passwordEntryFieldValue, securid.deviceId.blackberry),
+            () => securid.v3(tokenEntryFieldValue, passwordEntryFieldValue, securid.deviceId.blackberry10),
+            () => securid.v3(tokenEntryFieldValue, passwordEntryFieldValue, securid.deviceId.windowsPhone),
+            () => securid.v3(tokenEntryFieldValue, passwordEntryFieldValue, securid.deviceId.windows),
+            () => securid.v3(tokenEntryFieldValue, passwordEntryFieldValue, securid.deviceId.macos),
 
-            () => securid.v2(tokenEntryFieldValue, '', securid.deviceId.android),
+            () => securid.v2(tokenEntryFieldValue, passwordEntryFieldValue, deviceEntryFieldValue),
+            () => securid.v2(tokenEntryFieldValue, passwordEntryFieldValue, securid.deviceId.android),
             () => securid.v2(tokenEntryFieldValue),
-            () => securid.v2(tokenEntryFieldValue, '', securid.deviceId.iphone),
-            () => securid.v2(tokenEntryFieldValue, '', securid.deviceId.blackberry),
-            () => securid.v2(tokenEntryFieldValue, '', securid.deviceId.blackberry10),
-            () => securid.v2(tokenEntryFieldValue, '', securid.deviceId.windowsPhone),
-            () => securid.v2(tokenEntryFieldValue, '', securid.deviceId.windows),
-            () => securid.v2(tokenEntryFieldValue, '', securid.deviceId.macos),
+            () => securid.v2(tokenEntryFieldValue, passwordEntryFieldValue, securid.deviceId.iphone),
+            () => securid.v2(tokenEntryFieldValue, passwordEntryFieldValue, securid.deviceId.blackberry),
+            () => securid.v2(tokenEntryFieldValue, passwordEntryFieldValue, securid.deviceId.blackberry10),
+            () => securid.v2(tokenEntryFieldValue, passwordEntryFieldValue, securid.deviceId.windowsPhone),
+            () => securid.v2(tokenEntryFieldValue, passwordEntryFieldValue, securid.deviceId.windows),
+            () => securid.v2(tokenEntryFieldValue, passwordEntryFieldValue, securid.deviceId.macos),
         );
     
     if (err) {
