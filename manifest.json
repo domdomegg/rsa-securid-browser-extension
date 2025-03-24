@@ -1,6 +1,6 @@
 {
   "name": "RSA SecurID Code Generator",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "manifest_version": 3,
   "description": "Generate RSA SecurID Codes easily in your browser",
   "homepage_url": "http://github.com/domdomegg/rsa-securid-browser-extension",
